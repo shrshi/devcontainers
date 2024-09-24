@@ -1,0 +1,7 @@
+{
+  "name": "Install various useful utilities",
+  "id": "utils",
+  "version": "0.alpha",
+  "description": "A feature to install commandline utilities",
+  "postAttachCommand": "git config --global user.name \"Shruti Shivakumar\" && git config --global user.email \"shruti.shivakumar@gmail.com\" && git config --global user.signingkey \"/home/coder/.ssh/github-signing.pub\" && git config --global gpg.format ssh && git config --global gpg.ssh.allowedSignersFile \"/home/coder/.ssh/allowed_signers\" && git config --global commit.gpgsign true && git config --global tag.gpgsign true && git config --global merge.gpgsign true"
+}

@@ -1,4 +1,5 @@
 {
+  "name": "sshivakumar-devcontainer",
   "build": {
     "context": "${localWorkspaceFolder}/.devcontainer",
     "dockerfile": "${localWorkspaceFolder}/.devcontainer/rapids.Dockerfile",
@@ -15,10 +16,24 @@
   ],
   "hostRequirements": {"gpu": "optional"},
   "features": {
+    "./features/src/cuda": {
+      "version": "12.2",
+      "cuDNNVersion": "8",
+      "installcuBLAS": true,
+      "installcuDNN": true,
+      "installcuSOLVER": true,
+      "installcuRAND": true,
+      "installcuSPARSE": true
+    },
     "./features/src/utils": {},
-    "./features/src/rapids-build-utils": {}
+    "./features/src/rapids-build-utils": {},
+    "./features/local/utils": {},
+    "ghcr.io/s1n7ax/devcontainer-features/neovim-essentials:2": {},
+    "ghcr.io/s1n7ax/devcontainer-features/neovim:2": {},
+    "./features/local/dotfiles": {}
   },
   "overrideFeatureInstallOrder": [
+    "./features/src/cuda",
     "./features/src/utils",
     "./features/src/rapids-build-utils"
   ],
@@ -47,7 +62,13 @@
     "source=${localWorkspaceFolder}/../.conda/${localWorkspaceFolderBasename}-cuda12.2-envs,target=/home/coder/.conda/envs,type=bind,consistency=consistent",
     "source=${localWorkspaceFolder}/../.log/devcontainer-utils,target=/var/log/devcontainer-utils,type=bind,consistency=consistent",
     "source=${localWorkspaceFolder}/.devcontainer/cuda12.2-conda/features/src/utils/opt/devcontainer/bin,target=/opt/devcontainer/bin,type=bind,consistency=consistent",
-    "source=${localWorkspaceFolder}/.devcontainer/cuda12.2-conda/features/src/rapids-build-utils/opt/rapids-build-utils,target=/opt/rapids-build-utils,type=bind,consistency=consistent"
+    "source=${localWorkspaceFolder}/.devcontainer/cuda12.2-conda/features/src/rapids-build-utils/opt/rapids-build-utils,target=/opt/rapids-build-utils,type=bind,consistency=consistent",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/coder/.ssh,type=bind",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.config/nvim/init.lua,target=/home/coder/.config/nvim/init.lua,type=bind",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.config/nvim/lua,target=/home/coder/.config/nvim/lua,type=bind",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.config/nvim/taskwarrior-neovim,target=/home/coder/.config/nvim/taskwarrior-neovim,type=bind",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.tmux.conf,target=/home/coder/.tmux.conf,type=bind",
+    "source=${localWorkspaceFolder}/../datasets/adattagupta/redpajama_debug_2,target=/home/coder/datasets/adattagupta/redpajama_debug_2,type=bind,readonly"
   ],
   "customizations": {
     "vscode": {
